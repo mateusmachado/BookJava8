@@ -3,10 +3,12 @@ package comparator;
 public class Usuario {
 
 	private String name;
+	private Integer points;
 
-	public Usuario(String name) {
+	public Usuario(String name, Integer points) {
 		super();
 		this.name = name;
+		this.points = points;
 	}
 
 	public String getName() {
@@ -17,9 +19,16 @@ public class Usuario {
 		this.name = name;
 	}
 
-	@Override
-	public String toString() {
-		return "Usuario [name=" + name + "]";
+	public Integer getPoints() {
+		return points;
 	}
 
+	public void setPoints(Integer points) {
+		this.points = points;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [name=" + name + ", points=" + points + "]";
+	}
 }

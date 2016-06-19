@@ -3,15 +3,24 @@ package comparator;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Main {
 	public static void main(String[] args) {
 
-		List<Usuario> usuarios = Arrays.asList(new Usuario("Steve"), new Usuario("Jown"), new Usuario("Nina"));
+		List<Usuario> usuarios = Arrays.asList(new Usuario("Steve", 100), new Usuario("Jown", 20), new Usuario("Nina", 300));
 
 		System.out.println(compareUsuarios(usuarios));
 		System.out.println(sortList());
 
+		above100points(usuarios);
+	}
+
+	private static void above100points(List<Usuario> usuarios) {
+		usuarios
+		.stream()
+		.filter(u -> u.getPoints() > 100)
+		.forEach(System.out::println);
 	}
 
 	private static Comparator<Usuario> compareUsuarios(List<Usuario> usuarios) {
