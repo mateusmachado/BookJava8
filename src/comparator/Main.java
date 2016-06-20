@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Main {
 	public static void main(String[] args) {
@@ -17,19 +18,24 @@ public class Main {
 		System.out.println("First user, 100points+ " + userOptional(usuarios));
 		printUserAboveOnePointUsingPeek(usuarios);
 
-		System.out.println("AveragePoints: "+averagePoints(usuarios));
+		System.out.println("AveragePoints: " + averagePoints(usuarios));
+		System.out.println("sumPointsUsingReduce: " + sumPointsUsingReduce(usuarios));
 
-		System.out.println("sumPointsUsingReduce: " +sumPointsUsingReduce(usuarios));
+		System.out.println("topTwoUsers: "+topTwoUsers(usuarios));
+
+	}
+
+	private static List<String> topTwoUsers(List<Usuario> usuarios) {
+		List<String> topTwoUsuarios = usuarios.stream().limit(2).map(Usuario::getName).collect(Collectors.toList());
+		return topTwoUsuarios;
 	}
 
 	private static double averagePoints(List<Usuario> usuarios) {
-		double pontuacaoMedia = usuarios.stream().mapToInt(Usuario::getPoints).average().getAsDouble();
-		return pontuacaoMedia;
+		return usuarios.stream().mapToInt(Usuario::getPoints).average().getAsDouble();
 	}
 
 	private static int sumPointsUsingReduce(List<Usuario> usuarios) {
-		int total = usuarios.stream().mapToInt(Usuario::getPoints).reduce(0, (a, b) -> a + b);
-		return total;
+		return usuarios.stream().mapToInt(Usuario::getPoints).reduce(0, (a, b) -> a + b);
 	}
 
 	private static void printUserAboveOnePointUsingPeek(List<Usuario> usuarios) {
